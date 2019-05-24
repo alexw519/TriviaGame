@@ -11,7 +11,8 @@ var questions =
             "Celsius",
             "Kelvin"
         ],
-        answerIndex: 1
+        answerIndex: 1,
+        pictureId: "4ZgLPakqTajjVFOVqw"
     },
     two = 
     {
@@ -23,7 +24,8 @@ var questions =
             "Middle Finger",
             "Pointer Finger"
         ],
-        answerIndex: 2
+        answerIndex: 2,
+        pictureId: "l3UcqjMBeQzXaoqGI"
     },
     three = 
     {
@@ -48,7 +50,8 @@ var questions =
             "Indian",
             "Pacific"
         ],
-        answerIndex: 0
+        answerIndex: 0,
+        pictureId: "qHz3mRPG4je0w"
     },
     five = 
     {
@@ -56,11 +59,12 @@ var questions =
         choices:
         [
             "Si",
-            "Ar",
             "Au",
+            "Ag",
             "S"
         ],
-        answerIndex: 2
+        answerIndex: 2,
+        pictureId: "tHyYVcQPXYF8c2eYjR"
     },
     six = 
     {
@@ -72,7 +76,8 @@ var questions =
             "Earth",
             "Jupiter"
         ],
-        answerIndex: 3
+        answerIndex: 3,
+        pictureId: "6Bh9wnTgVqAPm"
     },
     seven = 
     {
@@ -84,7 +89,8 @@ var questions =
             "Nintendo",
             "Sony"
         ],
-        answerIndex: 2
+        answerIndex: 2,
+        pictureId: "4Iepymq5msMg"
     },
     eight = 
     {
@@ -96,7 +102,8 @@ var questions =
             "Red",
             "Green"
         ],
-        answerIndex: 0
+        answerIndex: 0,
+        pictureId: "13bQlXWgv1hvldoIBF"
     },
     nine = 
     {
@@ -108,7 +115,8 @@ var questions =
             "Rook",
             "King"
         ],
-        answerIndex: 3
+        answerIndex: 3,
+        pictureId: "JJlFxKzdFNbMc"
     },
     ten = 
     {
@@ -120,7 +128,8 @@ var questions =
             "74",
             "56"
         ],
-        answerIndex: 0
+        answerIndex: 0,
+        pictureId: "rmPO4UCJXGNNu"
     }    
 ]
 
@@ -189,10 +198,10 @@ function resultScreen(result)
         wrongAnswers++;
         $("#questionDiv").html("<h2>Sorry, the Correct Answer Was: " + rightAnswer + "</h2>");
     }
-    getImage("12qj9BbWNWbnz2");
+    getImage(questions[currentQuestion].pictureId);
 
     //Wait At This Screen For Some Time, And Then Go To The Next Question
-    // timer = setTimeout(function (){resultsTimer();}, 5000);
+    timer = setTimeout(function (){resultsTimer();}, 5000);
 }
 
 function finalScreen()
@@ -222,6 +231,7 @@ function questionTimer()
 function resultsTimer()
 {
     $("#questionDiv").empty();
+    $("#resultDiv").empty();
     if (questionNumber < 10)
     {
        showQuestion(questions);

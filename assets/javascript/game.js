@@ -35,7 +35,8 @@ var questions =
             "Michelangelo",
             "Donatello"
         ],
-        answerIndex: 1
+        answerIndex: 1,
+        pictureId: "12qj9BbWNWbnz2"
     },
     four = 
     {
@@ -298,8 +299,9 @@ function getImage(answerId)
     }).then(function(response)
     {
         var answerImage = $("<img>");
-        answerImage.attr("src", response.data.embed_url);
-        console.log(response.embed_url);
+        // answerImage.attr("src", response.data.embed_url);
+        answerImage.attr("src", response.data.images.original.url);
+        console.log(response.data.embed_url);
         $("#resultDiv").append(answerImage);
     })
 }

@@ -144,7 +144,9 @@ function reset()
     guess = 4;
     isRight = false;
 
-    $("#resetButton").hide();
+    // $("#resetButton").hide();
+    $("#resetButton").css("visibility", "hidden");
+    $("#resultDiv").empty();
 
 
     showQuestion(questions);
@@ -186,9 +188,10 @@ function resultScreen(result)
         wrongAnswers++;
         $("#questionDiv").html("<h2>Sorry, the Correct Answer Was: " + rightAnswer + "</h2>");
     }
+    getImage("12qj9BbWNWbnz2");
 
     //Wait At This Screen For Some Time, And Then Go To The Next Question
-    timer = setTimeout(function (){resultsTimer();}, 5000);
+    // timer = setTimeout(function (){resultsTimer();}, 5000);
 }
 
 function finalScreen()
@@ -197,7 +200,7 @@ function finalScreen()
     $("#resultDiv").html("<h3>You Had " + correctAnswers + " Correct Answers");
     $("#resultDiv").append("<h3>You Had " + wrongAnswers + " Incorrect Answers");
     //Show The Reset Button
-    $("#resetButton").show();
+    $("#resetButton").css("visibility", "visible");
 }
 
 function questionTimer()
@@ -285,3 +288,18 @@ $("#startButton").on("click", function()
     $("#startButton").hide();
     showQuestion(questions);
 })
+
+function getImage(answerId)
+{
+    var queryURL = "https://api.giphy.com/v1/gifs/" + answerId + "?api_key=5tQ9UTo8mjRwwFkXBekijv4vt8KzKW9t";
+    $.ajax({
+        url: queryURL,
+        method: "GET"
+    }).then(function(response)
+    {
+        var answerImage = $("<img>");
+        answerImage.attr("src", response.data.embed_url);
+        console.log(response.embed_url);
+        $("#resultDiv").append(answerImage);
+    })
+}

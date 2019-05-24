@@ -127,12 +127,11 @@ var correctAnswers = 0;
 var wrongAnswers = 0;
 var currentQuestion = 0;
 var questionNumber = 0;
-var guess = 0;
+var guess = 4;
 var isRight = false;
 var rightAnswer;
 var correctIndex;
-
-showQuestion(questions);
+var timer;
 
 //Resets All Of The Values So The User Can Play Again
 function reset()
@@ -141,7 +140,7 @@ function reset()
     wrongAnswers = 0;
     currentQuestion = 0;
     questionNumber = 0;
-    guess = 0;
+    guess = 4;
     isRight = false;
 
     $("#resetButton").hide();
@@ -163,12 +162,14 @@ function showQuestion(questionArray)
     correctIndex = questionArray[questionNumber].answerIndex;
     rightAnswer = questionArray[questionNumber].choices[correctIndex];
     questionNumber++;
+    isRight = false;
 
-    //Add a timer
+    timer = setTimeout(function (){questionTimer();}, 10000);
 }
 
 function resultScreen(result)
 {
+    clearTimeout(timer);
     $(".answers").empty();
     $("#questionDiv").empty();
  
@@ -184,14 +185,7 @@ function resultScreen(result)
     }
 
     //Wait At This Screen For Some Time, And Then
-    if (questionNumber < 10)
-    {
-       showQuestion(questions);
-    }
-    else
-    {
-        finalScreen();
-    }
+    timer = setTimeout(function (){resultsTimer();}, 5000);
 }
 
 function finalScreen()
@@ -203,9 +197,25 @@ function finalScreen()
     $("#resetButton").show();
 }
 
+function questionTimer()
+{
+    resultScreen(isRight);    
+}
+function resultsTimer()
+{
+    if (questionNumber < 10)
+    {
+       showQuestion(questions);
+    }
+    else
+    {
+        finalScreen();
+    }
+}
 
 $("#answer0").on("click", function()
 {
+
     guess = 0;
     if (guess === questions[currentQuestion].answerIndex)
         isRight = true;
@@ -247,4 +257,9 @@ $("#answer3").on("click", function()
 $("#resetButton").on("click", function()
 {
     reset();
+})
+$("#startButton").on("click", function()
+{
+    $("#startButton").hide();
+    showQuestion(questions);
 })

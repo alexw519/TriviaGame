@@ -27,99 +27,99 @@ var questions =
     },
     three = 
     {
-        question: "Which Is Not A Unit Of Temperature?",
+        question: "Who Painted The Mona Lisa?",
         choices:
         [
-            "Fahrenheit",
-            "Decible",
-            "Celsius",
-            "Kelvin"
+            "Raphael",
+            "Da Vinci",
+            "Michelangelo",
+            "Donatello"
         ],
-        answerIndex: 2
+        answerIndex: 1
     },
     four = 
     {
-        question: "Which Is Not A Unit Of Temperature?",
+        question: "Which Is The Smallest Ocean?",
         choices:
         [
-            "Fahrenheit",
-            "Decible",
-            "Celsius",
-            "Kelvin"
+            "Arctic",
+            "Atlantic",
+            "Indian",
+            "Pacific"
         ],
-        answerIndex: 2
+        answerIndex: 0
     },
     five = 
     {
-        question: "Which Is Not A Unit Of Temperature?",
+        question: "On The Periodic Table, What Is The Symbol For Silver?",
         choices:
         [
-            "Fahrenheit",
-            "Decible",
-            "Celsius",
-            "Kelvin"
+            "Si",
+            "Ar",
+            "Au",
+            "S"
         ],
         answerIndex: 2
     },
     six = 
     {
-        question: "Which Is Not A Unit Of Temperature?",
+        question: "Which Planet Has The Most Moons?",
         choices:
         [
-            "Fahrenheit",
-            "Decible",
-            "Celsius",
-            "Kelvin"
+            "Neptune",
+            "Saturn",
+            "Earth",
+            "Jupiter"
         ],
-        answerIndex: 2
+        answerIndex: 3
     },
     seven = 
     {
-        question: "Which Is Not A Unit Of Temperature?",
+        question: "Which Company Does Not Make Phones?",
         choices:
         [
-            "Fahrenheit",
-            "Decible",
-            "Celsius",
-            "Kelvin"
+            "Apple",
+            "LG",
+            "Nintendo",
+            "Sony"
         ],
         answerIndex: 2
     },
     eight = 
     {
-        question: "Which Is Not A Unit Of Temperature?",
+        question: "What Color Jersey Is Worn By The Winners Of The Tour De France?",
         choices:
         [
-            "Fahrenheit",
-            "Decible",
-            "Celsius",
-            "Kelvin"
+            "Yellow",
+            "Blue",
+            "Red",
+            "Green"
         ],
-        answerIndex: 2
+        answerIndex: 0
     },
     nine = 
     {
-        question: "Which Is Not A Unit Of Temperature?",
+        question: "What Chess Piece Can Move In All Directions?",
         choices:
         [
-            "Fahrenheit",
-            "Decible",
-            "Celsius",
-            "Kelvin"
+            "Bishop",
+            "Pawn",
+            "Rook",
+            "King"
         ],
-        answerIndex: 2
+        answerIndex: 3
     },
     ten = 
     {
-        question: "Which Is Not A Unit Of Temperature?",
+        question: "How Many Keys Are On A Piano?",
         choices:
         [
-            "Fahrenheit",
-            "Decible",
-            "Celsius",
-            "Kelvin"
+            "88",
+            "100",
+            "74",
+            "56"
         ],
-        answerIndex: 2
+        answerIndex: 0
     }    
 ]
 
@@ -167,7 +167,7 @@ function showQuestion(questionArray)
 
 function resultScreen(result)
 {
-    $(".answers").text("");
+    $(".answers").empty();
  
     if (result)
     {
@@ -181,14 +181,14 @@ function resultScreen(result)
     }
 
     //Wait At This Screen For Some Time, And Then
-    // if (questionNumber < 10)
-    // {
-    //    showQuestion(questions);
-    // }
-    // else
-    // {
-    //     finalScreen();
-    // }
+    if (questionNumber < 10)
+    {
+       showQuestion(questions);
+    }
+    else
+    {
+        finalScreen();
+    }
 }
 
 function finalScreen()

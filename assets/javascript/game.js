@@ -144,7 +144,7 @@ function reset()
     guess = 0;
     isRight = false;
 
-    //Hide The Reset Button
+    $("#resetButton").hide();
 
 
     showQuestion(questions);
@@ -163,11 +163,14 @@ function showQuestion(questionArray)
     correctIndex = questionArray[questionNumber].answerIndex;
     rightAnswer = questionArray[questionNumber].choices[correctIndex];
     questionNumber++;
+
+    //Add a timer
 }
 
 function resultScreen(result)
 {
     $(".answers").empty();
+    $("#questionDiv").empty();
  
     if (result)
     {
@@ -194,7 +197,10 @@ function resultScreen(result)
 function finalScreen()
 {
     //Show Amount Of Correct And Wrong Answers
+    $("#resultDiv").html("<h3>You Had " + correctAnswers + " Correct Answers");
+    $("#resultDiv").append("<h3>You Had " + wrongAnswers + " Incorrect Answers");
     //Show The Reset Button
+    $("#resetButton").show();
 }
 
 
@@ -237,4 +243,8 @@ $("#answer3").on("click", function()
         isRight = false;
 
     resultScreen(isRight);
+})
+$("#resetButton").on("click", function()
+{
+    reset();
 })

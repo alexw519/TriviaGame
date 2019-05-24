@@ -132,6 +132,7 @@ var isRight = false;
 var rightAnswer;
 var correctIndex;
 var timer;
+var timerCount;
 
 //Resets All Of The Values So The User Can Play Again
 function reset()
@@ -163,8 +164,10 @@ function showQuestion(questionArray)
     rightAnswer = questionArray[questionNumber].choices[correctIndex];
     questionNumber++;
     isRight = false;
+    guess = 4;
 
-    timer = setTimeout(function (){questionTimer();}, 10000);
+    timerCount = 10;
+    timer = setInterval(function (){questionTimer();}, 1000);
 }
 
 function resultScreen(result)
@@ -184,7 +187,7 @@ function resultScreen(result)
         $("#questionDiv").html("<h2>Sorry, the Correct Answer Was: " + rightAnswer + "</h2>");
     }
 
-    //Wait At This Screen For Some Time, And Then
+    //Wait At This Screen For Some Time, And Then Go To The Next Question
     timer = setTimeout(function (){resultsTimer();}, 5000);
 }
 
@@ -199,10 +202,22 @@ function finalScreen()
 
 function questionTimer()
 {
-    resultScreen(isRight);    
+    if (timerCount === 0)
+    {
+        clearInterval(timer);
+        $("#timeLeft").empty();
+        resultScreen(isRight);  
+    }
+    else
+    {
+        $("#timeLeft").html("<h4>Time Remaining: " + timerCount + " seconds</h4>");
+        timerCount--;
+    }
+  
 }
 function resultsTimer()
 {
+    $("#questionDiv").empty();
     if (questionNumber < 10)
     {
        showQuestion(questions);
@@ -215,7 +230,8 @@ function resultsTimer()
 
 $("#answer0").on("click", function()
 {
-
+    clearInterval(timer);
+    $("#timeLeft").empty();
     guess = 0;
     if (guess === questions[currentQuestion].answerIndex)
         isRight = true;
@@ -226,6 +242,8 @@ $("#answer0").on("click", function()
 })
 $("#answer1").on("click", function()
 {
+    clearInterval(timer);
+    $("#timeLeft").empty();
     guess = 1;
     if (guess === questions[currentQuestion].answerIndex)
         isRight = true;
@@ -236,6 +254,8 @@ $("#answer1").on("click", function()
 })
 $("#answer2").on("click", function()
 {
+    clearInterval(timer);
+    $("#timeLeft").empty();
     guess = 2;
     if (guess === questions[currentQuestion].answerIndex)
         isRight = true;
@@ -246,6 +266,8 @@ $("#answer2").on("click", function()
 })
 $("#answer3").on("click", function()
 {
+    clearInterval(timer);
+    $("#timeLeft").empty();
     guess = 3;
     if (guess === questions[currentQuestion].answerIndex)
         isRight = true;

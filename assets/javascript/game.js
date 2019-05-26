@@ -133,6 +133,7 @@ var questions =
     }    
 ]
 
+//Initalizing Variables
 var correctAnswers = 0;
 var wrongAnswers = 0;
 var currentQuestion = 0;
@@ -154,19 +155,20 @@ function reset()
     guess = 4;
     isRight = false;
 
-    // $("#resetButton").hide();
     $("#resetButton").css("visibility", "hidden");
+    $("#resultDiv").css("background-color", "transparent");
     $("#resultDiv").empty();
-
 
     showQuestion(questions);
 }
 
+//Gets the question array, and then lists the question and possible answers
 function showQuestion(questionArray)
 {
     $("#questionDiv").text();
     $("#questionDiv").append("<h2>" + questionArray[questionNumber].question + "</h2>");
 
+    //For loop to display the choices
     for (i = 0; i < questionArray[questionNumber].choices.length; i++)
     {
         $("#answer" + i).html("<h3 class='answers'>" + questionArray[questionNumber].choices[i] + "</h3>");
@@ -178,14 +180,21 @@ function showQuestion(questionArray)
     isRight = false;
     guess = 4;
 
+    //Sets a timer for 10 seconds, and calls the questionTimer function every second.
     timerCount = 10;
     timer = setInterval(function (){questionTimer();}, 1000);
 }
 
+//Tells the user the results of their guess
 function resultScreen(result)
 {
     clearTimeout(timer);
     $(".answers").empty();
+
+    //Clearing the answer divs
+    for (i = 0; i < 4; i++)
+        $("#answer" + i).empty();
+
     $("#questionDiv").empty();
  
     if (result)
@@ -198,36 +207,55 @@ function resultScreen(result)
         wrongAnswers++;
         $("#questionDiv").html("<h2>Sorry, the Correct Answer Was: " + rightAnswer + "</h2>");
     }
+
+    //Pulls a gif from the question array id
     getImage(questions[currentQuestion].pictureId);
 
     //Wait At This Screen For Some Time, And Then Go To The Next Question
     timer = setTimeout(function (){resultsTimer();}, 5000);
 }
 
+//The final result screen and gives the user the option to restart the game
 function finalScreen()
 {
     //Show Amount Of Correct And Wrong Answers
     $("#resultDiv").html("<h3>You Had " + correctAnswers + " Correct Answers");
     $("#resultDiv").append("<h3>You Had " + wrongAnswers + " Incorrect Answers");
+    $("#resultDiv").css("background-color", "white");
+
     //Show The Reset Button
     $("#resetButton").css("visibility", "visible");
 }
 
+//When called, checks the time and branches based on how much time is left if any
 function questionTimer()
 {
+    //If the timer ran out, the answer is marked as wrong and goes to the result screen
     if (timerCount === 0)
     {
         clearInterval(timer);
         $("#timeLeft").empty();
         resultScreen(isRight);  
     }
+
+    //If the timer is 5 or less, changes the color of text to red
+    else if (timerCount <= 5)
+    {
+        $("#timeLeft").css("color", "red");
+        $("#timeLeft").html("<h4>Time Remaining: " + timerCount + " seconds</h4>");
+        timerCount--;
+    }
+
     else
     {
+        $("#timeLeft").css("color", "black");
         $("#timeLeft").html("<h4>Time Remaining: " + timerCount + " seconds</h4>");
         timerCount--;
     }
   
 }
+
+//Function to either go to the next question or end the game when called
 function resultsTimer()
 {
     $("#questionDiv").empty();
@@ -242,6 +270,7 @@ function resultsTimer()
     }
 }
 
+//When field is selected, puts it in as the user's answer and branches to the results screen
 $("#answer0").on("click", function()
 {
     clearInterval(timer);
@@ -254,6 +283,8 @@ $("#answer0").on("click", function()
     
     resultScreen(isRight);
 })
+
+//When field is selected, puts it in as the user's answer and branches to the results screen
 $("#answer1").on("click", function()
 {
     clearInterval(timer);
@@ -266,6 +297,8 @@ $("#answer1").on("click", function()
 
     resultScreen(isRight);
 })
+
+//When field is selected, puts it in as the user's answer and branches to the results screen
 $("#answer2").on("click", function()
 {
     clearInterval(timer);
@@ -278,6 +311,8 @@ $("#answer2").on("click", function()
 
     resultScreen(isRight);
 })
+
+//When field is selected, puts it in as the user's answer and branches to the results screen
 $("#answer3").on("click", function()
 {
     clearInterval(timer);
@@ -290,6 +325,8 @@ $("#answer3").on("click", function()
 
     resultScreen(isRight);
 })
+
+
 $("#resetButton").on("click", function()
 {
     reset();
@@ -309,7 +346,6 @@ function getImage(answerId)
     }).then(function(response)
     {
         var answerImage = $("<img>");
-        // answerImage.attr("src", response.data.embed_url);
         answerImage.attr("src", response.data.images.original.url);
         console.log(response.data.embed_url);
         $("#resultDiv").append(answerImage);

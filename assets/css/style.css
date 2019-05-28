@@ -45,6 +45,11 @@ button
     margin-top: 70px;
 }
 
+#startButton
+{
+    margin-left: 20px;
+}
+
 .answers
 {
     padding: 10px;

@@ -242,14 +242,14 @@ function questionTimer()
     else if (timerCount <= 5)
     {
         $("#timeLeft").css("color", "red");
-        $("#timeLeft").html("<h4>Time Remaining: " + timerCount + " seconds</h4>");
+        $("#timeLeft").html("<h4>Time Left: " + timerCount + " seconds</h4>");
         timerCount--;
     }
 
     else
     {
         $("#timeLeft").css("color", "black");
-        $("#timeLeft").html("<h4>Time Remaining: " + timerCount + " seconds</h4>");
+        $("#timeLeft").html("<h4>Time Left: " + timerCount + " seconds</h4>");
         timerCount--;
     }
   
